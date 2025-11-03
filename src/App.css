@@ -1,0 +1,169 @@
+/* Estilos generales */
+body {
+    background-color: #f5f7fa;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.MainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Container {
+    max-width: 40rem;
+}
+
+
+h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Formulario */
+form {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 25px;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+
+form button.cancel {
+    background-color: #95a5a6;
+    margin-left: 8px;
+}
+
+form button.cancel:hover {
+    background-color: #7f8c8d;
+}
+
+/* Tabla */
+table {
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+img {
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+/* Botones de acciones */
+.action-btn {
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.edit-btn {
+    background-color: #27ae60;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #1e8449;
+}
+
+.delete-btn {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
+}
+
+.properties-grid {
+    display: grid;
+    gap: 20px;
+}
+
+.property-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.property-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.property-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.property-info h2 {
+    margin: 0 0 10px;
+    font-size: 1.25rem;
+}
+
+.property-info p {
+    margin: 5px 0;
+}
+
+.price {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #00682B;
+    margin-top: auto;
+}
+
+.smallPrice {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #00682B;
+    margin-top: auto;
+}
+
+.actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+@media (max-width: 600px) {
+    .property-image {
+        height: 180px;
+    }
+}

@@ -1,0 +1,43 @@
+.searchContainer {
+    width: 100%;
+    display: flex;
+}
+
+.searchContainer p {
+    color: black;
+}
+
+.searchBox {
+    display: flex;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    width: 30rem;
+}
+
+@media (max-width: 250px) {
+    .searchBox {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 500px) {
+    .searchBox {
+        width: 100%;
+    }
+}
+
+.searchAppInput {
+    height: 3rem;
+    border-radius: 0.3rem;
+    background-color: rgb(255 255 255);
+    font-size: 1rem;
+    color: rgb(0 0 0);
+    padding-left: 1.1rem;
+    width: 100%;
+    border: 1px solid gray;
+}
+
+.searchAppInput:focus {
+    outline: none;
+    box-shadow: inset 0px -3px 0px var(--text-over-body);
+}
