@@ -50,9 +50,9 @@ export default function NavBar({ loggedIn, setLoggedIn }) {
     }, [setLoggedIn])
 
     function handleLogout() {
-       localStorage.removeItem('token')
-       if (typeof setLoggedIn === 'function') setLoggedIn(false)
-       navigate('/')
+        localStorage.removeItem('token')
+        if (typeof setLoggedIn === 'function') setLoggedIn(false)
+        navigate('/')
     }
 
     return (
@@ -81,7 +81,12 @@ export default function NavBar({ loggedIn, setLoggedIn }) {
                 <PopoverGroup className="hidden lg:flex lg:gap-x-12">
                     <a href="/" className="text-sm/6 font-semibold text-white">Inicio</a>
                     <a href="/propiedades" className="text-sm/6 font-semibold text-white">Propiedades</a>
-                    <a href="/admin" className="text-sm/6 font-semibold text-white">Administración</a>
+                    {/* 👇 CAMBIO CLAVE: Muestra el enlace de Administración solo si loggedIn es true */}
+                    {loggedIn && (
+                        <Link to="/admin" className="text-sm/6 font-semibold text-white">
+                            Administración
+                        </Link>
+                    )}
                     <a href="/contacto" className="text-sm/6 font-semibold text-white">Contacto</a>
                 </PopoverGroup>
 
