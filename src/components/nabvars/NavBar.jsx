@@ -1,6 +1,6 @@
 'use client'
-
-import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import {
     Dialog,
     DialogPanel,
@@ -37,7 +37,18 @@ const callsToAction = [
 
 export default function NavBar() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
+    const [loggedIn, setLoggedIn] = useState(Boolean(localStorage.getItem('token')))
+    const navigate = useNavigate()
+    useEffect(() => {
+        const onStorage = () => setLoggedIn(Boolean(localStorage.getItem('token')))
+        window.addEventListener('storage', onStorage)
+        return () => window.removeEventListener('storage', onStorage)
+    }, [])     
+    function handleLogout() {
+       localStorage.removeItem('token')
+       setLoggedIn(false)
+       navigate('/') 
+   }
     return (
         <header className="bg-gray-900">
             <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
@@ -78,9 +89,18 @@ export default function NavBar() {
                     </a>
                 </PopoverGroup>
                 <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                    <a href="/login" className="text-sm/6 font-semibold text-white">
-                        Iniciar Sesión <span aria-hidden="true">&rarr;</span>
-                    </a>
+                    {loggedIn ? (
+                        <button
+                            onClick={handleLogout}
+                            className="text-sm/6 font-semibold text-white"
+                        >
+                            Cerrar sesión
+                        </button>
+                    ) : (
+                        <Link to="/login" className="text-sm/6 font-semibold text-white">
+                            Iniciar Sesión <span aria-hidden="true">&rarr;</span>
+                        </Link>
+                    )}
                 </div>
             </nav>
             <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
@@ -140,6 +160,24 @@ export default function NavBar() {
                                 >
                                     Iniciar Sesión
                                 </a>
+                            </div>
+                           <div className="py-6">
+                               {loggedIn ? (
+                                    <button
+                                        onClick={() => { setMobileMenuOpen(false); handleLogout() }}
+                                        className="-mx-3 block w-full text-left rounded-lg px-3 py-2.5 text-base/7 font-semibold text-white hover:bg-white/5"
+                                    >
+                                        Cerrar Sesión
+                                    </button>
+                                ) : (
+                                    <Link
+                                        to="/login"
+                                        onClick={() => setMobileMenuOpen(false)}
+                                        className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-white hover:bg-white/5"
+                                    >
+                                        Iniciar Sesión
+                                    </Link>
+                                )}
                             </div>
                         </div>
                     </div>
