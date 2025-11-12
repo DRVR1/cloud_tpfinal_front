@@ -6,7 +6,6 @@ export default function Contact() {
 
             <div className="mx-auto max-w-2xl text-center">
                 <h2 className="text-4xl font-semibold tracking-tight text-balance text-gray-900 sm:text-5xl">Contacto</h2>
-                <p className="mt-2 text-lg/8 text-gray-600">Aute magna irure deserunt veniam aliqua magna enim voluptate.</p>
             </div>
             <form action="#" method="POST" className="mx-auto mt-16 max-w-xl sm:mt-20">
                 <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
@@ -113,7 +112,7 @@ export default function Contact() {
                         <label htmlFor="agree-to-policies" className="text-sm/6 text-gray-600">
                             Al seleccionar el checkbox, aceptas la{' '}
                             <a href="#" className="font-semibold whitespace-nowrap text-indigo-600">
-                                política de privacidad.
+                                política de privacidad
                             </a>
                             .
                         </label>
