@@ -1,8 +1,13 @@
 import axios from "axios";
 
 const API_URL = "/api/property";
+const API_AI_URL = "/api/chat";
+
 
 export const PropertyService = {
+    // Hablar con la IA
+    askAI: (prompt) => axios.get(API_AI_URL, { params: { prompt } }),
+
     // Crear propiedad
     create: (property) => axios.post(API_URL, property),
 

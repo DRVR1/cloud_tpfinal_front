@@ -11,6 +11,8 @@ export default function Admin() {
         description: "",
         imageUrl: "",
         price: "",
+        mapsLink: "",
+        address: "",
     });
     const [isEditing, setIsEditing] = useState(false);
 
@@ -137,6 +139,24 @@ export default function Admin() {
                         name="price"
                         placeholder="Precio"
                         value={form.price}
+                        onChange={handleChange}
+                        required
+                    />
+                    <br />
+                    <input
+                        type="text"
+                        name="mapsLink"
+                        placeholder="Link del mapa"
+                        value={form.mapsLink}
+                        onChange={handleChange}
+                        required
+                    />
+                    <br />
+                    <input
+                        type="text"
+                        name="address"
+                        placeholder="Direccíon (lo mas completa posible)"
+                        value={form.address}
                         onChange={handleChange}
                         required
                     />

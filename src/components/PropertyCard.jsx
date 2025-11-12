@@ -1,8 +1,10 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 
 export default function PropertyCard({ property }) {
+    const navigate = useNavigate();
     return (
-        <div onClick={() => alert("Ver info de la propiedad")} className="cursor-pointer bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col">
+        <div onClick={() => navigate(`/propiedad/${property.id}`)} className="cursor-pointer bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col">
             {/* Imagen */}
             <div className="relative h-48 w-full">
                 <img
