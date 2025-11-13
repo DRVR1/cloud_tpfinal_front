@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react'
 
 export default function Login({ setLoggedIn }) {
     const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')      
-    const [error, setError] = useState(null)           
+    const [password, setPassword] = useState('')
+    const [error, setError] = useState(null)
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
 
@@ -14,13 +14,13 @@ export default function Login({ setLoggedIn }) {
         return () => window.removeEventListener('storage', onStorage)
     }, [])
 
- async function handleSubmit(e) {
+    async function handleSubmit(e) {
         if (e && e.preventDefault) e.preventDefault()
         console.log('handleSubmit called', { email, password })
         setError(null)
         setLoading(true)
         try {
-            const res = await fetch('http://localhost:8080/login', {
+            const res = await fetch('/api/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username: email, password })
@@ -45,7 +45,7 @@ export default function Login({ setLoggedIn }) {
     function handleLogout() {
         localStorage.removeItem('token')
         setLoggedIn(false)
-        navigate('/') 
+        navigate('/')
     }
 
     return (
