@@ -9,7 +9,7 @@ npm install axios
 npm run dev
 
 ## Compilacion para docker
-docker build -t frontend .
+docker build -t ianvid/cloudfront:latest .
 
 
 <img width="1920" height="1080" alt="Screenshot from 2025-08-22 21-03-22" src="https://github.com/user-attachments/assets/03a30956-f60f-4e7d-902c-dc45cf189750" />
