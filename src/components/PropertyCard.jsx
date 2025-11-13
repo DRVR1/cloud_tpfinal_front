@@ -41,7 +41,7 @@ export default function PropertyCard({ property }) {
 
                 {/* Ubicación */}
                 <div className="text-xs text-gray-500 mt-auto">
-                    📍 {property.location?.title || "Ubicación no disponible"}
+                    📍 {property?.address || "Ubicación no disponible"}
                 </div>
             </div>
         </div>
