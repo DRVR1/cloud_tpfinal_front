@@ -38,7 +38,7 @@ export default function Propiedad() { // Cambiado el nombre para coincidir con A
                 setProperty(res.data);
                 setLoading(false);
 
-                var prompt = "Dada la siguiente direccion, proveer una descripcion adaptada para una descripcion de un inmueble inmobiliario, no incluyas saludos ni comentarios conversacionales, ni opciones. Tu respuesta entera va a ser directamente la descripcion de la propiedad. Dirección: " + res.data.address;
+                var prompt = "Dada la siguiente direccion, proveer una descripcion adaptada para una descripcion de un inmueble inmobiliario, no incluyas saludos ni comentarios conversacionales, ni opciones, ni campos para completar. Tener en cuenta que tu misma respuesta será mostrada en la página de la propiedad sin hacerle ningún cambio. Dirección: " + res.data.address;
                 console.log(prompt);
                 PropertyService.askAI(prompt)
                     .then(function (response) {
