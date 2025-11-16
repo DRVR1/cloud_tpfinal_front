@@ -38,8 +38,20 @@ export default function Propiedad() { // Cambiado el nombre para coincidir con A
                 setProperty(res.data);
                 setLoading(false);
 
-                var prompt = "Dada la siguiente direccion, proveer una descripcion adaptada para una descripcion de un inmueble inmobiliario, no incluyas saludos ni comentarios conversacionales, ni opciones, ni campos para completar. Tener en cuenta que tu misma respuesta será mostrada en la página de la propiedad sin hacerle ningún cambio. Dirección: " + res.data.address;
-                console.log(prompt);
+                var prompt =
+                    "Actúa como un redactor inmobiliario experto. " +
+                    "Genera una descripción de propiedad atractiva y vendedora, lista para publicarse. " +
+                    "La respuesta debe ser ÚNICAMENTE el texto de la descripción. " +
+                    "No incluyas saludos, despedidas, títulos, campos para completar ni ningún texto adicional. " +
+                    "Usa un tono cálido y profesional. " +
+                    "Datos de la propiedad: \n" +
+                    "- Tipo: " + res.data.title + "\n" +
+                    "- Dirección: " + res.data.address + "\n" +
+                    "- Habitaciones: " + res.data.bedrooms + "\n" +
+                    "- Baños: " + res.data.bathrooms + "\n" +
+                    "- Metros cuadrados: " + res.data.surface;
+
+
                 PropertyService.askAI(prompt)
                     .then(function (response) {
                         setChatResponse(response.data);
@@ -159,7 +171,7 @@ export default function Propiedad() { // Cambiado el nombre para coincidir con A
                         </div>
 
                         <div className="mt-8 pt-6 border-t border-gray-200">
-                            <h3 className="text-lg font-medium text-gray-900">Comentario de la IA</h3>
+                            <h3 className="text-lg font-medium text-gray-900">Comentario generado por IA:</h3>
                             <div className="mt-4 text-base text-gray-700 whitespace-pre-wrap space-y-4">
                                 {/* 'whitespace-pre-wrap' respeta los saltos de línea del texto */}
                                 <p>{chatResponse}</p>
