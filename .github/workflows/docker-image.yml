@@ -38,3 +38,34 @@ jobs:
           file: ./Dockerfile  # Apunta al Dockerfile en la raíz
           push: true   # Indica que SÍ debe subir (push) la imagen
           tags: ianvid/cloudfront:latest # ! CAMBIA ESTO
+  deploy:
+    name: Despliegue a Azure VM
+    runs-on: ubuntu-latest
+    
+    # ESTO ES CRUCIAL: Este job SOLO se ejecutará si 'build-and-push' termina correctamente.
+    needs: [build-and-push] 
+
+    steps:
+    - name: SSH y Ejecución de Comandos de Despliegue
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        # Configuración de Conexión SSH (Secretos de GitHub)
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        
+        # Comandos a ejecutar en la sesión SSH remota
+        script: |
+          echo "Iniciando despliegue remoto..."
+          
+          # 1. Pull de las últimas imágenes (ya subidas por el trabajo anterior)
+          echo "Haciendo pull de las últimas imágenes de Docker Hub..."
+          sudo docker pull ianvid/cloudfront:latest
+          
+          # 2. Levantar los servicios con docker compose
+          # ATENCIÓN: Asegúrate de que este comando se ejecuta desde el directorio donde está tu docker-compose.yml
+          cd
+          echo "Levantando los servicios con docker compose..."
+          sudo docker compose up -d
+          
+          echo "Despliegue finalizado exitosamente."
