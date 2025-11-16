@@ -66,6 +66,6 @@ jobs:
           # ATENCIÓN: Asegúrate de que este comando se ejecuta desde el directorio donde está tu docker-compose.yml
           cd
           echo "Levantando los servicios con docker compose..."
-          sudo docker compose up -d
+          sudo docker compose up -d --force-recreate
           
           echo "Despliegue finalizado exitosamente."
