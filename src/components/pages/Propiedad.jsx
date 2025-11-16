@@ -121,11 +121,6 @@ export default function Propiedad() { // Cambiado el nombre para coincidir con A
                     {/* Columna 2: Información y Detalles */}
                     <div className="mt-10 px-4 sm:px-0 lg:mt-0">
 
-                        {/* Ubicación (sutil, arriba de todo) */}
-                        <a className="text-base font-medium text-indigo-600" href={property.mapsLink}>
-                            📍 Ver Ubicación
-                        </a>
-
                         {/* Título */}
                         <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl mt-2">
                             {property.title}
