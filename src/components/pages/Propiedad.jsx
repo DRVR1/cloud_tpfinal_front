@@ -2,6 +2,7 @@
 
 import { PropertyService } from "../service/PropertyService";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 // Importar 'useParams' para obtener el ID de la URL
 import { useParams } from 'react-router-dom';
 import GoogleMap from "../GoogleMap";
@@ -9,6 +10,8 @@ import GoogleMap from "../GoogleMap";
 // El nombre de la función debe coincidir con el componente en App.jsx,
 // pero aquí lo mantengo como PropertyDetail para la consistencia del código.
 export default function Propiedad() { // Cambiado el nombre para coincidir con App.jsx
+
+    const navigate = useNavigate();
 
     // 1. OBTENER EL ID DE LA URL
     const { id } = useParams(); // Lee el parámetro 'id' de la ruta /propiedad/:id
@@ -100,7 +103,6 @@ export default function Propiedad() { // Cambiado el nombre para coincidir con A
         );
     }
 
-
     // --- Renderizado Principal de la Propiedad ---
     return (
         <div className="bg-white">
@@ -184,7 +186,7 @@ export default function Propiedad() { // Cambiado el nombre para coincidir con A
                         <div className="mt-10">
                             <button
                                 type="button"
-                                className="w-full flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 shadow-lg hover:shadow-indigo-500/50 transition-all duration-300 ease-in-out"
+                                onClick={() => { navigate("/contacto", { state: { message: "Hola! Estoy interesado en la propiedad ubicada en: " + property.address } }) }} className="w-full flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 shadow-lg hover:shadow-indigo-500/50 transition-all duration-300 ease-in-out"
                             >
                                 Contactar al vendedor
                             </button>
