@@ -1,11 +1,12 @@
 # React + Vite
+La descripcion del proyecto esta en el repositorio del backend: https://github.com/DRVR1/cloud_tpfinal_back
 
 ## Setup
 npm install
 npm install react-router-dom
 npm install axios
 
-## Debug
+## Correr en modo Debug
 npm run dev
 
 ## Compilacion para docker
