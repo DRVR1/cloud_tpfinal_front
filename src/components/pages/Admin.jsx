@@ -161,7 +161,7 @@ export default function Admin() {
                         required
                     />
                     <br />
-                    <Button title={"Crear"} type="submit" >{isEditing ? "Actualizar" : "Crear"}</Button>
+                    <Button title={isEditing ? "Actualizar" : "Crear"} type="submit" ></Button>
                     {isEditing && <Button title={"Cancelar"} onClick={resetForm} className={"delete-btn"}></Button>}
                 </form>
 
