@@ -4,6 +4,7 @@ import { PropertyService } from "../service/PropertyService";
 import React, { useEffect, useState } from "react";
 // Importar 'useParams' para obtener el ID de la URL
 import { useParams } from 'react-router-dom';
+import GoogleMap from "../GoogleMap";
 
 // El nombre de la función debe coincidir con el componente en App.jsx,
 // pero aquí lo mantengo como PropertyDetail para la consistencia del código.
@@ -103,6 +104,7 @@ export default function Propiedad() { // Cambiado el nombre para coincidir con A
     // --- Renderizado Principal de la Propiedad ---
     return (
         <div className="bg-white">
+
             <div className="container mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
                 {/* ... el resto del JSX que usa 'property' ... */}
 
@@ -187,6 +189,8 @@ export default function Propiedad() { // Cambiado el nombre para coincidir con A
                                 Contactar al vendedor
                             </button>
                         </div>
+                        <GoogleMap address={property.address}></GoogleMap>
+
                     </div>
                 </div>
             </div>
