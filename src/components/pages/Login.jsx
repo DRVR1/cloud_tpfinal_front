@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import Swal from 'sweetalert2' // <-- IMPORTADO
 
 export default function Login({ setLoggedIn }) {
     const [email, setEmail] = useState('')
@@ -16,29 +17,66 @@ export default function Login({ setLoggedIn }) {
 
     async function handleSubmit(e) {
         if (e && e.preventDefault) e.preventDefault()
-        console.log('handleSubmit called', { email, password })
         setError(null)
         setLoading(true)
         try {
             const res = await fetch('/api/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
+                // Asegúrate de que el backend espera "username"
                 body: JSON.stringify({ username: email, password })
             })
-            console.log('fetch response', res)
+
+            // Leemos la respuesta como texto primero, sea éxito o error
+            const responseBody = await res.text();
             setLoading(false)
+
             if (!res.ok) {
-                const txt = await res.text().catch(() => '')
-                throw new Error(txt || 'Error en el inicio de sesión')
+                // Caso de error (ej. 401 Unauthorized)
+                let errorMessage = 'Usuario o contraseña incorrectos'; // Mensaje por defecto
+                try {
+                    // Intenta parsear el JSON de error de Spring
+                    const errorJson = JSON.parse(responseBody);
+                    if (errorJson.message && errorJson.message.includes('Bad credentials')) {
+                        errorMessage = 'Usuario o contraseña incorrectos.';
+                    } else if (errorJson.message) {
+                        errorMessage = errorJson.message; // Usa el mensaje de Spring
+                    }
+                } catch (parseError) {
+                    // No era JSON, pero 'responseBody' puede tener texto
+                    if (responseBody) {
+                        errorMessage = responseBody;
+                    }
+                }
+                throw new Error(errorMessage); // Lanza al catch de abajo
             }
-            const token = await res.text()
+
+            // Caso de éxito (res.ok es true)
+
+            // Revisa el caso "Not logged" con status 200 OK
+            if (responseBody === 'Not logged') {
+                throw new Error('No se pudo autenticar.'); // Lanza al catch de abajo
+            }
+
+            // ÉXITO REAL
+            const token = responseBody; // El body es el token string
             localStorage.setItem('token', token)
             if (typeof setLoggedIn === 'function') setLoggedIn(true)
             navigate('/')
+
         } catch (err) {
             console.error('login error', err)
             setLoading(false)
             setError(err.message || 'Error en el inicio de sesión')
+
+            // MOSTRAR SWEET ALERT
+            Swal.fire({
+                icon: 'error',
+                title: 'Login Fallido',
+                // err.message ahora tiene el mensaje de error limpio
+                text: err.message,
+                confirmButtonText: 'Intentar de nuevo'
+            })
         }
     }
 
@@ -65,8 +103,9 @@ export default function Login({ setLoggedIn }) {
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div>
+                            {/* Importante: El label dice Correo, pero el backend espera 'username' */}
                             <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
-                                Correo electrónico
+                                Correo electrónico (Username)
                             </label>
                             <div className="mt-2">
                                 <input
